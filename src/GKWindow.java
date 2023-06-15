@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class GKWindow {
 
-	public static void greenwald_khanna_window(int n, int v, int w, double e, ArrayList<Block> blockList) {
+	public static void insertAndCompress(int n, int v, int w, double e, ArrayList<Block> blockList) {
 
 		// calculates window start & end positions
 		int w_min, w_max = n;
@@ -26,7 +26,7 @@ public class GKWindow {
 
 		Block under_construction = blockList.get(blockList.size()-1);
 
-		GK.greenwald_khanna(under_construction.numObs(), v, under_construction.summary(), e/2);
+		GK.insertAndCompress(under_construction.numObs(), v, under_construction.summary(), e/2);
 
 		under_construction.incrNumObs();
 
@@ -87,7 +87,7 @@ public class GKWindow {
 		/* ys is the largest element in S2 that is smaller than xr */
 		if (j > 0) {
 			ys = s2.get(j-1);
-			updateRanks(j-1,s2);
+			updateRanks(j-1, s2);
 		} else {
 			ys = null;
 		}

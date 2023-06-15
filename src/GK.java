@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class GK {
 
-	public static void greenwald_khanna(int n, int v, ArrayList<Tuple> s, double e) {
+	public static void insertAndCompress(int n, int v, ArrayList<Tuple> s, double e) {
 
 		// checks whether it is time to perform a compression
-		if ((n % (1/(2*e))) == 0) {
+		if ((n % (1 / (2 * e))) == 0) {
 			compress(n, s, e);
 		}
 

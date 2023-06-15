@@ -1,5 +1,6 @@
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -17,7 +18,7 @@ public class Main {
 		 * Tuples expected: { (1, 1, 0), (3, 2, 0), (5, 2, 0), (7, 1, 2), (8, 2, 0), (9, 1, 2), (11, 2, 0), (12, 1, 0), (13, 1, 2), (14, 1, 1), (16, 1, 2), (17, 1, 2), (18, 2, 0), (20, 2, 0) }
 		 */
 
-		/*
+/*
 
 		double e = 0.25;
 
@@ -28,7 +29,7 @@ public class Main {
 		int[] observations = { 12, 10, 11, 10, 1, 10, 11, 9 };
 
 		for (Integer obs : observations) {
-			GK.greenwald_khanna(n, obs, summary, e);
+			GK.insertAndCompress(n, obs, summary, e);
 			n++;
 		}
 
@@ -44,7 +45,9 @@ public class Main {
 			System.out.println(q);
 		}
 
-		 */
+
+
+ */
 
 		/* ========================================================================= */
 
@@ -57,8 +60,8 @@ public class Main {
 		 * Q = { 1:[1..1], 2:[2..3], 4:[4..6], 7:[6..8], 8:[8..11], 12:[10..13], 15:[13..15], 17:[16..16] } = { (1, 1, 0), (2, 1, 1), (4, 2, 2), (7, 2, 2), (8, 2, 3), (12, 2, 3), (15, 3, 2), (17, 3, 0)}
 		 */
 
-		/*
 
+/*
 		System.out.println("");
 
 		Tuple t11 = new Tuple(2,1,0);
@@ -85,12 +88,15 @@ public class Main {
 
         ArrayList<Tuple> s = GKWindow.merge(s1, s2);
 
+
         for (Tuple t : s) {
             System.out.println(t.toString());
-//        	System.out.println("("+t.getVal()+", "+t.getRmin()+", "+t.getRmax()+")");
+        	System.out.println("("+t.getVal()+", "+t.getRmin()+", "+t.getRmax()+")");
         }
 
-		 */
+ */
+
+
 
 		/* ========================================================================= */
 
@@ -121,7 +127,7 @@ public class Main {
 		}
 
 		for (Integer obs : observations) {
-			GKWindow.greenwald_khanna_window(n, obs, w, e, blist);
+			GKWindow.insertAndCompress(n, obs, w, e, blist);
 			n++;
 		}
 
@@ -173,7 +179,7 @@ public class Main {
 		ArrayList<Tuple> s = new ArrayList<Tuple>();
 		n = 0;
 		for (Integer obs : observations) {
-			GK.greenwald_khanna(n, obs, s, e);
+			GK.insertAndCompress(n, obs, s, e);
 			n++;
 		}
 
@@ -194,5 +200,7 @@ public class Main {
 		}
 
 	}
+
+
 
 }
