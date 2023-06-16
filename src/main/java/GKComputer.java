@@ -33,24 +33,24 @@ public class GKComputer {
 		}
 	}
 
-	public void insertMany(List<Integer> bulk) {
-		for (Integer obs : bulk) {
+	public void insertMany(List<Long> bulk) {
+		for (Long obs : bulk) {
 			insertAndCompress(obs);
 		}
 	}
 
-	public void insertAndCompress(int obs) {
+	public void insertAndCompress(long obs) {
 		GK.insertAndCompress(n, obs, summary, epsilon);
 		n++;
 	}
 
-	public ArrayList<Integer> quantiles(double phi) {
+	public ArrayList<Long> quantiles(double phi) {
 		return GK.quantile(phi, n, summary, epsilon);
 	}
 
 	public double quantile(double phi) {
-		ArrayList<Integer> quantiles = quantiles(phi);
-		return quantiles.stream().mapToInt(Integer::intValue).average().orElse(0.0);
+		ArrayList<Long> quantiles = quantiles(phi);
+		return quantiles.stream().mapToLong(Long::longValue).average().orElse(0.0);
 
 	}
 

@@ -4,20 +4,20 @@ public class Block {
 
 	private ArrayList<Tuple> summary;
 
-	private int bstart;
-	private int numObs;
+	private long bstart;
+	private long numObs;
 
-	public Block(int bstart) {
+	public Block(long bstart) {
 		summary = new ArrayList<Tuple>();
 		numObs = 0;
 		this.bstart = bstart;
 	}
 
-	public int bstart() {
+	public long bstart() {
 		return bstart;
 	}
 
-	public int numObs() {
+	public long numObs() {
 		return numObs;
 	}
 

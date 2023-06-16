@@ -165,9 +165,9 @@ public class Main {
 
 		System.out.println("");
 
-		ArrayList<Integer> quantile = GKWindow.quantile(0.5, w, e, blist);
+		ArrayList<Long> quantile = GKWindow.quantile(0.5, w, e, blist);
 
-		for (Integer q : quantile) {
+		for (Long q : quantile) {
 			System.out.println(q);
 		}
 
@@ -191,11 +191,11 @@ public class Main {
 //			System.out.println("("+t.getVal()+", "+rmin+", "+rmax+")");
 		}
 
-		ArrayList<Integer> quant = GK.quantile(0.5, n, s, e);
+		ArrayList<Long> quant = GK.quantile(0.5, n, s, e);
 
 		System.out.println("");
 
-		for (Integer q : quant) {
+		for (Long q : quant) {
 			System.out.println(q);
 		}
 

@@ -1,14 +1,15 @@
 
 public class Tuple {
 
-	private int val;
-	private int g;
-	private int d;
+	private long val;		// an observation, v in the paper
+	private int g;			// g = rmin(v_i) - rmin(v_(i-1)) ; rmin being the lower bound on the rank of v amoung the observations seen so far
+	private int d;			// d = rmax(v_i) - rmin(v_i) , rmax being the upper bound.
 
+	// ranks are left integers, allowing 2 147 483 647 values. Should be enough !
 	private int rmin;
 	private int rmax;
 
-	public Tuple(int val, int g, int d) {
+	public Tuple(long val, int g, int d) {
 		this.val = val;
 		this.g = g;
 		this.d = d;
@@ -16,7 +17,7 @@ public class Tuple {
 		rmax = 0;
 	}
 
-	public int getVal() {
+	public long getVal() {
 		return val;
 	}
 

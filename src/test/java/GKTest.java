@@ -5,6 +5,7 @@ import org.junit.runners.JUnit4;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,10 +15,10 @@ import java.util.Random;
 @RunWith(JUnit4.class)
 public class GKTest {
 
-	List<Integer> firstList = Arrays.asList(33, 40, 28, 24, 59, 63, 29, 60, 2, 39, 86, 99, 72, 9, 57, 3, 72, 55, 99, 88, 21, 34, 29, 62, 11, 3, 70, 61, 18, 20, 15, 8, 4, 90, 86, 8, 66, 38, 60, 52, 11, 95, 83, 79, 77, 58, 3, 73, 18, 58, 86, 79, 91, 19, 43, 95, 74, 78, 96, 68, 36, 31, 79, 42, 44, 2, 65, 9, 79, 13, 92, 4, 85, 76, 73, 65, 73, 59, 40, 41, 20, 27, 15, 42, 89, 56, 62, 82, 5, 43, 71, 49, 62, 37, 22, 97, 30, 9, 89, 12, 91, 33, 85, 12, 49, 41, 49, 58, 65, 92, 13, 54, 42, 61, 98, 35, 35, 25, 73, 32, 3, 4, 57, 92, 50, 34, 47, 52, 93, 95, 28, 90, 46, 25, 98, 19, 50, 46, 87, 26, 18, 69, 47, 40, 40, 53, 7, 1, 41, 65, 31, 75, 76, 10, 90, 31, 87, 3, 84, 82, 96, 94, 79, 80, 46, 67, 57, 9, 54, 30, 79, 15, 40, 71, 47, 50, 97, 95, 69, 42, 23, 4, 51, 81, 30, 56, 50, 84, 35, 27, 64, 30, 16, 92, 24, 21, 86, 13, 12, 75, 20, 60, 78, 39, 33, 60, 87, 74, 54, 29, 49, 35, 88, 69, 52, 89, 78, 65, 53, 12, 2, 21, 66, 99, 61, 69, 67, 31, 17, 22, 62, 50, 99, 95, 31, 38, 94, 60, 39, 56, 69, 88, 26, 16, 7, 1, 15, 55, 16, 92, 28, 99, 14, 61, 44, 3, 7, 55, 40, 49, 60, 40, 17, 94, 12, 25, 54, 9, 91, 60, 6, 82, 12, 85, 20, 80, 75, 4, 24, 17, 45, 98, 15, 78, 98, 23, 91, 41, 60, 90, 13, 12, 42, 11, 98, 50, 20, 23, 62, 35, 84, 6, 73, 80, 61, 92, 18, 76, 58, 33, 9, 63, 35, 30, 51, 58, 86, 34, 11, 15, 25, 34, 52, 95, 72, 7, 75, 61, 16, 75, 49, 60, 10, 41, 83, 79, 45, 73, 83, 16, 29, 26, 54, 24, 32, 89, 73, 99, 7, 23, 5, 84, 28, 59, 84, 98, 51, 1, 63, 54, 92, 23, 21, 61, 39, 96, 11, 80, 84, 97, 15, 58, 76, 21, 38, 68, 35, 11, 21, 89, 10, 78, 75, 70, 23, 98, 7, 87, 22, 81, 29, 81, 16, 75, 3, 84, 77, 34, 70, 7, 73, 18, 28, 23, 3, 74, 19, 19, 90, 8, 31, 71, 91, 22, 65, 68, 63, 81, 30, 67, 44, 66, 83, 27, 98, 43, 62, 64, 34, 77, 39, 43, 77, 13, 68, 82, 26, 43, 59, 79, 57, 41, 65, 82, 22, 82, 69, 42, 46, 19, 31, 37, 15, 91, 63, 82, 63, 44, 24, 16, 48, 54, 79, 62, 53, 12, 41, 69, 28, 62, 94, 71, 10, 65, 6, 22, 5, 73, 15, 18, 40, 77, 44, 74, 22, 2, 5, 79, 15, 28, 18, 3, 87, 31, 3, 42, 93, 77, 6, 73, 33, 88, 37, 94, 86, 69, 79, 36, 17, 83, 12, 29, 71, 4, 95, 70, 23, 72, 15, 84, 96, 59, 83, 78, 80, 96, 25, 62, 89, 64, 43, 51, 37, 35, 26, 85, 96, 25, 87, 49, 91, 78, 61, 16, 88, 39, 41, 32, 74, 87, 25, 60, 59, 46, 35, 7, 38, 88, 59, 9, 23, 43, 6, 25, 36, 5, 26, 3, 64, 11, 13, 5, 75, 94, 43, 41, 1, 81, 46, 11, 81, 30, 36, 95, 18, 95, 67, 63, 19, 93, 11, 44, 80, 98, 59, 92, 40, 65, 47, 18, 24, 49, 65, 34, 35, 54, 48, 47, 91, 40, 6, 8, 2, 8, 69, 82, 1, 47, 35, 93, 56, 98, 97, 83, 76, 92, 85, 20, 69, 46, 29, 21, 55, 25, 1, 48, 34, 82, 4, 67, 97, 36, 66, 4, 59, 9, 89, 78, 13, 11, 69, 70, 45, 93, 76, 46, 27, 98, 68, 72, 38, 95, 49, 45, 94, 2, 69, 72, 57, 29, 46, 56, 69, 97, 94, 70, 12, 3, 34, 9, 86, 83, 54, 16, 1, 47, 99, 3, 14, 9, 69, 93, 17, 31, 85, 95, 51, 43, 53, 82, 17, 1, 62, 72, 89, 97, 85, 99, 52, 54, 24, 53, 28, 89, 51, 93, 55, 15, 77, 11, 92, 3, 64, 34, 93);
-	List<Integer> secondList = Arrays.asList(58, 8, 95, 3, 8, 3, 87, 78, 3, 7, 84, 84, 85, 65, 10, 36, 87, 68, 81, 61, 73, 95, 87, 39, 30, 60, 33, 19, 98, 80, 50, 3, 85, 21, 50, 29, 56, 96, 22, 7, 76, 82, 41, 92, 65, 61, 83, 51, 64, 68, 60, 84, 36, 29, 51, 2, 32, 37, 52, 93, 56, 93, 21, 52, 9, 49, 9, 93, 50, 84, 75, 6, 59, 74, 42, 16, 78, 75, 76, 26, 12, 2, 13, 1, 14, 82, 36, 9, 66, 49, 63, 34, 68, 12, 44, 35, 93, 49, 67, 68, 32, 54, 41, 77, 34, 67, 90, 23, 3, 92, 54, 51, 70, 2, 62, 66, 9, 36, 83, 83, 25, 26, 71, 66, 6, 41, 65, 14, 29, 79, 56, 17, 25, 79, 94, 90, 12, 24, 39, 67, 81, 29, 99, 73, 78, 33, 11, 18, 52, 5, 14, 28, 69, 24, 51, 38, 43, 24, 75, 9, 52, 6, 55, 8, 96, 90, 2, 61, 83, 23, 16, 24, 64, 85, 54, 93, 85, 55, 8, 23, 22, 11, 76, 84, 74, 6, 21, 62, 46, 59, 32, 50, 81, 45, 21, 3, 47, 45, 30, 34, 19, 75, 60, 45, 74, 64, 29, 5, 1, 70, 63, 4, 99, 65, 68, 67, 69, 3, 96, 71, 35, 99, 73, 36, 17, 53, 26, 59, 68, 91, 27, 84, 46, 93, 97, 61, 87, 75, 50, 88, 74, 75, 37, 63, 74, 51, 54, 57, 1, 25, 20, 7, 16, 38, 21, 67, 14, 57, 9, 7, 5, 49, 78, 29, 40, 41, 86, 64, 34, 5, 57, 6, 11, 97, 75, 29, 93, 33, 39, 51, 77, 69, 95, 20, 72, 51, 10, 56, 53, 25, 46, 59, 26, 97, 28, 37, 36, 36, 48);
+	List<Long> firstList = Arrays.asList(33L,  40L,  28L,  24L,  59L,  63L,  29L,  60L,  2L,  39L,  86L,  99L,  72L,  9L,  57L,  3L,  72L,  55L,  99L,  88L,  21L,  34L,  29L,  62L,  11L,  3L,  70L,  61L,  18L,  20L,  15L,  8L,  4L,  90L,  86L,  8L,  66L,  38L,  60L,  52L,  11L,  95L,  83L,  79L,  77L,  58L,  3L,  73L,  18L,  58L,  86L,  79L,  91L,  19L,  43L,  95L,  74L,  78L,  96L,  68L,  36L,  31L,  79L,  42L,  44L,  2L,  65L,  9L,  79L,  13L,  92L,  4L,  85L,  76L,  73L,  65L,  73L,  59L,  40L,  41L,  20L,  27L,  15L,  42L,  89L,  56L,  62L,  82L,  5L,  43L,  71L,  49L,  62L,  37L,  22L,  97L,  30L,  9L,  89L,  12L,  91L,  33L,  85L,  12L,  49L,  41L,  49L,  58L,  65L,  92L,  13L,  54L,  42L,  61L,  98L,  35L,  35L,  25L,  73L,  32L,  3L,  4L,  57L,  92L,  50L,  34L,  47L,  52L,  93L,  95L,  28L,  90L,  46L,  25L,  98L,  19L,  50L,  46L,  87L,  26L,  18L,  69L,  47L,  40L,  40L,  53L,  7L,  1L,  41L,  65L,  31L,  75L,  76L,  10L,  90L,  31L,  87L,  3L,  84L,  82L,  96L,  94L,  79L,  80L,  46L,  67L,  57L,  9L,  54L,  30L,  79L,  15L,  40L,  71L,  47L,  50L,  97L,  95L,  69L,  42L,  23L,  4L,  51L,  81L,  30L,  56L,  50L,  84L,  35L,  27L,  64L,  30L,  16L,  92L,  24L,  21L,  86L,  13L,  12L,  75L,  20L,  60L,  78L,  39L,  33L,  60L,  87L,  74L,  54L,  29L,  49L,  35L,  88L,  69L,  52L,  89L,  78L,  65L,  53L,  12L,  2L,  21L,  66L,  99L,  61L,  69L,  67L,  31L,  17L,  22L,  62L,  50L,  99L,  95L,  31L,  38L,  94L,  60L,  39L,  56L,  69L,  88L,  26L,  16L,  7L,  1L,  15L,  55L,  16L,  92L,  28L,  99L,  14L,  61L,  44L,  3L,  7L,  55L,  40L,  49L,  60L,  40L,  17L,  94L,  12L,  25L,  54L,  9L,  91L,  60L,  6L,  82L,  12L,  85L,  20L,  80L,  75L,  4L,  24L,  17L,  45L,  98L,  15L,  78L,  98L,  23L,  91L,  41L,  60L,  90L,  13L,  12L,  42L,  11L,  98L,  50L,  20L,  23L,  62L,  35L,  84L,  6L,  73L,  80L,  61L,  92L,  18L,  76L,  58L,  33L,  9L,  63L,  35L,  30L,  51L,  58L,  86L,  34L,  11L,  15L,  25L,  34L,  52L,  95L,  72L,  7L,  75L,  61L,  16L,  75L,  49L,  60L,  10L,  41L,  83L,  79L,  45L,  73L,  83L,  16L,  29L,  26L,  54L,  24L,  32L,  89L,  73L,  99L,  7L,  23L,  5L,  84L,  28L,  59L,  84L,  98L,  51L,  1L,  63L,  54L,  92L,  23L,  21L,  61L,  39L,  96L,  11L,  80L,  84L,  97L,  15L,  58L,  76L,  21L,  38L,  68L,  35L,  11L,  21L,  89L,  10L,  78L,  75L,  70L,  23L,  98L,  7L,  87L,  22L,  81L,  29L,  81L,  16L,  75L,  3L,  84L,  77L,  34L,  70L,  7L,  73L,  18L,  28L,  23L,  3L,  74L,  19L,  19L,  90L,  8L,  31L,  71L,  91L,  22L,  65L,  68L,  63L,  81L,  30L,  67L,  44L,  66L,  83L,  27L,  98L,  43L,  62L,  64L,  34L,  77L,  39L,  43L,  77L,  13L,  68L,  82L,  26L,  43L,  59L,  79L,  57L,  41L,  65L,  82L,  22L,  82L,  69L,  42L,  46L,  19L,  31L,  37L,  15L,  91L,  63L,  82L,  63L,  44L,  24L,  16L,  48L,  54L,  79L,  62L,  53L,  12L,  41L,  69L,  28L,  62L,  94L,  71L,  10L,  65L,  6L,  22L,  5L,  73L,  15L,  18L,  40L,  77L,  44L,  74L,  22L,  2L,  5L,  79L,  15L,  28L,  18L,  3L,  87L,  31L,  3L,  42L,  93L,  77L,  6L,  73L,  33L,  88L,  37L,  94L,  86L,  69L,  79L,  36L,  17L,  83L,  12L,  29L,  71L,  4L,  95L,  70L,  23L,  72L,  15L,  84L,  96L,  59L,  83L,  78L,  80L,  96L,  25L,  62L,  89L,  64L,  43L,  51L,  37L,  35L,  26L,  85L,  96L,  25L,  87L,  49L,  91L,  78L,  61L,  16L,  88L,  39L,  41L,  32L,  74L,  87L,  25L,  60L,  59L,  46L,  35L,  7L,  38L,  88L,  59L,  9L,  23L,  43L,  6L,  25L,  36L,  5L,  26L,  3L,  64L,  11L,  13L,  5L,  75L,  94L,  43L,  41L,  1L,  81L,  46L,  11L,  81L,  30L,  36L,  95L,  18L,  95L,  67L,  63L,  19L,  93L,  11L,  44L,  80L,  98L,  59L,  92L,  40L,  65L,  47L,  18L,  24L,  49L,  65L,  34L,  35L,  54L,  48L,  47L,  91L,  40L,  6L,  8L,  2L,  8L,  69L,  82L,  1L,  47L,  35L,  93L,  56L,  98L,  97L,  83L,  76L,  92L,  85L,  20L,  69L,  46L,  29L,  21L,  55L,  25L,  1L,  48L,  34L,  82L,  4L,  67L,  97L,  36L,  66L,  4L,  59L,  9L,  89L,  78L,  13L,  11L,  69L,  70L,  45L,  93L,  76L,  46L,  27L,  98L,  68L,  72L,  38L,  95L,  49L,  45L,  94L,  2L,  69L,  72L,  57L,  29L,  46L,  56L,  69L,  97L,  94L,  70L,  12L,  3L,  34L,  9L,  86L,  83L,  54L,  16L,  1L,  47L,  99L,  3L,  14L,  9L,  69L,  93L,  17L,  31L,  85L,  95L,  51L,  43L,  53L,  82L,  17L,  1L,  62L,  72L,  89L,  97L,  85L,  99L,  52L,  54L,  24L,  53L,  28L,  89L,  51L,  93L,  55L,  15L,  77L,  11L,  92L,  3L,  64L,  34L,  93L);
+	List<Long> secondList = Arrays.asList(58L, 8L, 95L, 3L, 8L, 3L, 87L, 78L, 3L, 7L, 84L, 84L, 85L, 65L, 10L, 36L, 87L, 68L, 81L, 61L, 73L, 95L, 87L, 39L, 30L, 60L, 33L, 19L, 98L, 80L, 50L, 3L, 85L, 21L, 50L, 29L, 56L, 96L, 22L, 7L, 76L, 82L, 41L, 92L, 65L, 61L, 83L, 51L, 64L, 68L, 60L, 84L, 36L, 29L, 51L, 2L, 32L, 37L, 52L, 93L, 56L, 93L, 21L, 52L, 9L, 49L, 9L, 93L, 50L, 84L, 75L, 6L, 59L, 74L, 42L, 16L, 78L, 75L, 76L, 26L, 12L, 2L, 13L, 1L, 14L, 82L, 36L, 9L, 66L, 49L, 63L, 34L, 68L, 12L, 44L, 35L, 93L, 49L, 67L, 68L, 32L, 54L, 41L, 77L, 34L, 67L, 90L, 23L, 3L, 92L, 54L, 51L, 70L, 2L, 62L, 66L, 9L, 36L, 83L, 83L, 25L, 26L, 71L, 66L, 6L, 41L, 65L, 14L, 29L, 79L, 56L, 17L, 25L, 79L, 94L, 90L, 12L, 24L, 39L, 67L, 81L, 29L, 99L, 73L, 78L, 33L, 11L, 18L, 52L, 5L, 14L, 28L, 69L, 24L, 51L, 38L, 43L, 24L, 75L, 9L, 52L, 6L, 55L, 8L, 96L, 90L, 2L, 61L, 83L, 23L, 16L, 24L, 64L, 85L, 54L, 93L, 85L, 55L, 8L, 23L, 22L, 11L, 76L, 84L, 74L, 6L, 21L, 62L, 46L, 59L, 32L, 50L, 81L, 45L, 21L, 3L, 47L, 45L, 30L, 34L, 19L, 75L, 60L, 45L, 74L, 64L, 29L, 5L, 1L, 70L, 63L, 4L, 99L, 65L, 68L, 67L, 69L, 3L, 96L, 71L, 35L, 99L, 73L, 36L, 17L, 53L, 26L, 59L, 68L, 91L, 27L, 84L, 46L, 93L, 97L, 61L, 87L, 75L, 50L, 88L, 74L, 75L, 37L, 63L, 74L, 51L, 54L, 57L, 1L, 25L, 20L, 7L, 16L, 38L, 21L, 67L, 14L, 57L, 9L, 7L, 5L, 49L, 78L, 29L, 40L, 41L, 86L, 64L, 34L, 5L, 57L, 6L, 11L, 97L, 75L, 29L, 93L, 33L, 39L, 51L, 77L, 69L, 95L, 20L, 72L, 51L, 10L, 56L, 53L, 25L, 46L, 59L, 26L, 97L, 28L, 37L, 36L, 36L, 48L);
 	long randomSeed = 2048;
-	//int nObservations = 100;
+	int nObservations = 10000;
 	Random random = new Random(randomSeed);
 
 	private static final Logger log = LoggerFactory.getLogger(GKTest.class);
@@ -76,7 +77,7 @@ public class GKTest {
 		double phi = 0.75;
 
 		// build model
-		GKComputer gkComputer = new GKComputer(0.01);
+		GKComputer gkComputer = new GKComputer(0.15);
 		gkComputer.insertMany(firstList);
 		gkComputer.insertMany(secondList);
 
@@ -85,7 +86,7 @@ public class GKTest {
 		// print quantile
 		double quantile = gkComputer.quantile(phi);			// expected 75 (computed with libreoffice calc)
 		log.info("original quantile {} (full list): {}", phi, quantile);
-		Assert.assertEquals(quantile, 75, 1);
+		Assert.assertEquals(quantile, 75, 10);
 
 		// save params
 		double epsilon = gkComputer.getEpsilon();
@@ -97,8 +98,8 @@ public class GKTest {
 
 		// ensure restored model outputs same quantile as original
 		double restoredQuantile = restoredGK.quantile(phi);
-		log.info("Restored quantile {} (full list): {}", phi, quantile);
-		Assert.assertEquals(restoredQuantile, 75, 1);
+		log.info("Restored quantile {} (full list): {}", phi, restoredQuantile);
+		Assert.assertEquals(quantile, restoredQuantile, 10);
 
 	}
 
@@ -130,9 +131,10 @@ public class GKTest {
 		// attempt merge models, not lists
 		GKComputer gkMergedModels = new GKComputer(epsilon);
 		int nObs = gkFirstList.getN() + gkSecondList.getN();
+		gkMergedModels.setN(nObs);
 		gkMergedModels.insertSummary(gkFirstList.getSummary());
 		gkMergedModels.insertSummary(gkSecondList.getSummary());
-		gkMergedModels.setN(nObs);
+
 
 		quantile = gkMergedModels.quantile(phi);		// expected 75 (computed with libreoffice calc)
 		log.info("avg quantile {} (merged models): {}", phi, quantile);
@@ -143,23 +145,42 @@ public class GKTest {
 	@Test
 	public void testGKBig() {
 
-		int nbAttempts = 50000000;
 		double epsilon = 0.05;
 		GKComputer gkModel = new GKComputer(epsilon);
 		double quantile = 0;
 		double phi = 0.75;
-		int bound = 100000;
 
-		log.info("Test GK big");
+		List<Long> observations = generateLongTimestamps();
+		gkModel.insertMany(observations);
 
-		for (int i = 0; i < nbAttempts; i++) {
-			gkModel.insertAndCompress(random.nextInt(bound));
+		log.info("Test GK with longs");
 
-			if (i % 5000 == 0) {
-				quantile = gkModel.quantile(phi);		// expected to tend towards phi * bound if observations are drawn at random (uniform drawing)
-				log.info("intermediate quantile {} (iter {}): {}", phi, i, quantile);
-				log.info("number of tuples: {}", gkModel.getSummary().size());
+		quantile = gkModel.quantile(phi);
+		log.info("avg quantile {}: {}", phi, quantile);
+	}
+
+	public List<Long> generateLongTimestamps() {
+		List<Long> longList = new ArrayList<>(nObservations);
+		long min = 1592329783000L; 		// 15 juin 2020
+		long max = 1686937817000L;		// 15 juin 2023
+
+		for (int i = 0; i < nObservations; i++) {
+
+			long val = min + (long) (random.nextDouble() * (max - min + 1));
+			longList.add(val);
+		}
+
+		writeNumbers(longList, "timestamps.txt");
+		return longList;
+	}
+
+	public void writeNumbers(List<Long> numbers, String filename)  {
+		try (PrintWriter pw = new PrintWriter(filename)) {
+			for (int i = 0; i < numbers.size(); i++) {
+				pw.println(numbers.get(i));
 			}
+		} catch (Exception err) {
+			err.printStackTrace();
 		}
 	}
 

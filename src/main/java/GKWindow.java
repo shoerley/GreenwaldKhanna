@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class GKWindow {
 
-	public static void insertAndCompress(int n, int v, int w, double e, ArrayList<Block> blockList) {
+	public static void insertAndCompress(long n, long v, int w, double e, ArrayList<Block> blockList) {
 
 		// calculates window start & end positions
-		int w_min, w_max = n;
+		long w_min, w_max = n;
 		if (n < w) {
 			w_min = 0;
 		} else {
@@ -32,7 +32,7 @@ public class GKWindow {
 
 	}
 
-	public static ArrayList<Integer> quantile(double phi, int w, double e, ArrayList<Block> blist) {
+	public static ArrayList<Long> quantile(double phi, int w, double e, ArrayList<Block> blist) {
 
 		ArrayList<Tuple> summary = blist.get(0).summary();
 
@@ -42,7 +42,7 @@ public class GKWindow {
 
 		}
 
-		ArrayList<Integer> quantiles = GK.quantile(phi, w, summary, e);
+		ArrayList<Long> quantiles = GK.quantile(phi, w, summary, e);
 
 		return quantiles;
 	}
@@ -126,7 +126,7 @@ public class GKWindow {
 		}
 		d = rmax - rmin;
 
-		Tuple t = new Tuple(xr.getVal(),g,d);
+		Tuple t = new Tuple(xr.getVal(), g, d);
 		t.setRmin(rmin);
 		t.setRmax(rmax);
 		s.add(k, t);

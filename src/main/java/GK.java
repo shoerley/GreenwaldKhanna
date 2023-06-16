@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class GK {
 
-	public static void insertAndCompress(int n, int v, ArrayList<Tuple> s, double e) {
+	public static void insertAndCompress(long n, long v, ArrayList<Tuple> s, double e) {
 
 		// checks whether it is time to perform a compression
 		if ((n % (1 / (2 * e))) == 0) {
@@ -13,9 +13,9 @@ public class GK {
 
 	}
 
-	public static ArrayList<Integer> quantile(double phi, int n, ArrayList<Tuple> s, double e) {
+	public static ArrayList<Long> quantile(double phi, int n, ArrayList<Tuple> s, double e) {
 
-		ArrayList<Integer> quantile = new ArrayList<Integer>(1);
+		ArrayList<Long> quantile = new ArrayList<Long>(1);
 
 		double en = e * n;
 		int r = (int) Math.ceil(phi * (n - 1));
@@ -35,7 +35,7 @@ public class GK {
 		return quantile;
 	}
 
-	private static void insert(int n, int v, ArrayList<Tuple> s, double e) {
+	private static void insert(long n, long v, ArrayList<Tuple> s, double e) {
 
 		// finds the right position to insert v 
 		int i = 0;
@@ -59,7 +59,7 @@ public class GK {
 
 	}
 
-	private static void compress(int n, ArrayList<Tuple> s, double e) {
+	private static void compress(long n, ArrayList<Tuple> s, double e) {
 
 		// invokes a method that constructs array of bands such that bands[delta] is the band for the provided delta
 		int[] bands = bands(n, e);
@@ -96,7 +96,7 @@ public class GK {
 	}
 
 	// This method returns an array of bands such that bands[delta] is the band for the provided delta
-	private static int[] bands(int n, double e) {
+	private static int[] bands(long n, double e) {
 
 		int p = (int) Math.floor(2*e*n); // p = floor(2eN) by definition
 
