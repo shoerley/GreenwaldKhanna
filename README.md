@@ -1,15 +1,67 @@
 # Greenwald-Khanna
-An implementation of the Greenwald-Khanna algorithm.
 
-#### References:
+This is a fork from https://github.com/WladimirLivolis/GreenwaldKhanna, which is an implementation of the Greenwald-Khanna algorithm.
+
+### What's new
+
+I did not modify the implementations of the algorithm. Thus, main improvements are about the creation of a wrapper/helper class `GKComputer`.
+
+1.  Serialization and deserialization of a GK model is easy. This can be made by simply exporting the tuples, epslion and the number of observations :
+   ```java
+private int n = 0;
+private double epsilon;
+ArrayList<Tuple> summary = new ArrayList<>();
+```
+
+2. Also makes easier to insert observations. This way of using instances of `GKComputer` instead of static `GK` better fits my use, maybe it will also fit someone else's :
+```java
+GKComputer gkComputer = new GKComputer(0.01);
+gkComputer.insertMany(listOfLongs);
+quantile = gkComputer.quantile(0.75);	
+```
+
+
+
+
+3. Merging works as follows :
+```java 
+// First model
+GKComputer gkFirstModel = ...;
+GKComputer gkSecondModel = ...;
+
+// Merge models into a new one
+GKComputer gkMergedModels = new GKComputer(epsilon);
+int nObs = // total number of observations of models 1 and 2;
+gkMergedModels.setN(nObs);
+gkMergedModels.insertSummary(gkFirstList.getSummary());
+gkMergedModels.insertSummary(gkSecondList.getSummary());
+// insert as many summaries (tuples) as needed
+        
+quantile = gkMergedModels.quantile(0.75);
+```
+
+
+4. Many tests are provided :
+   - Simple test 
+   - Restore test with only N, epsilon and the summary (without the list of observations, thus)
+   - Merge test, still without observations
+   - Test with big values
+   - ...
+
+
+### Practical remarks
+
+Note that if you intend to merge models, you should not use a value of epsilon that is too small for the models to be merged. 
+
+The merged model has to know the total number of observations prior to quantile computation. Also, all models to be merged should have the same epsilon value. This value is also a parameter for the merged model.
+
+There may be several candidates for a same quantile. As of today, the mean of the candidates is returned when calling `gkComputer.quantile`, and all candidates are returned when calling `gkComputerquantiles`.
+
+### References:
 
 1. Michael B. Greenwald, Sanjeev Khanna, **Space-efficient online computation of quantile summaries**, Proceedings of the 2001 ACM SIGMOD international conference on Management of data, p.58-66, May 21-24, 2001, Santa Barbara, California, USA.
-    - Link: ftp://ftp.cis.upenn.edu/pub/mbgreen/papers/sigmod01.pdf.gz
-2. Michael B. Greenwald, Sanjeev Khanna, **Quantiles and Equidepth Histograms over Streams**, Chapter 2 of Part II of "Data Stream Management: Processing High-Speed Data Streams", ed. M. Garofalakis, J. Gehrke, and R. Rastogi, (Springer, ISBN 978-3-540-28607-3).
-    - Link: https://www.cis.upenn.edu/~mbgreen/papers/stream-chapter.pdf
-3. Michael B. Greenwald, Sanjeev Khanna, **Power-conserving computation of order-statistics over sensor networks**, Proceedings of the twenty-third ACM SIGMOD-SIGACT-SIGART symposium on Principles of database systems, June 14-16, 2004, Paris, France. (*This reference was used for the merge algorithm*).
-    - Link: https://www.cis.upenn.edu/~mbgreen/papers/pods04.pdf
-4. Shun Yan Cheung's class notes from Emory University:
-    - http://www.mathcs.emory.edu/~cheung/Courses/584-StreamDB/Syllabus/08-Quantile/Greenwald.html
-    - http://www.mathcs.emory.edu/~cheung/Courses/584-StreamDB/Syllabus/08-Quantile/Greenwald2.html
-    - http://www.mathcs.emory.edu/~cheung/Courses/584-StreamDB/Syllabus/11-Window/Greenwald-window.html
+    - Link: http://infolab.stanford.edu/~datar/courses/cs361a/papers/quantiles.pdf
+    - The paper can also be found at the repository's root
+
+See the original implementation for more references and inspirations :
+   - https://github.com/WladimirLivolis/GreenwaldKhanna
