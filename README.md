@@ -4,7 +4,7 @@ This is a fork from https://github.com/WladimirLivolis/GreenwaldKhanna, which is
 
 ### What's new
 
-I did not modify the implementations of the algorithm. Thus, main improvements are about the creation of a wrapper/helper class `GKComputer`.
+I did not modify the implementation of the algorithm. Thus, main improvements are about the creation of a wrapper/helper class `GKComputer` plus the addition of some tests. And on top of this, this project uses gradle and junit.
 
 1.  Serialization and deserialization of a GK model is easy. This can be made by simply exporting the tuples, epslion and the number of observations :
    ```java
@@ -13,7 +13,7 @@ private double epsilon;
 ArrayList<Tuple> summary = new ArrayList<>();
 ```
 
-2. Also makes easier to insert observations. This way of using instances of `GKComputer` instead of static `GK` better fits my use, maybe it will also fit someone else's :
+2. Also makes it easier to insert observations. This way of using instances of `GKComputer` instead of static `GK` better fits my use, maybe it will also fit someone else's :
 ```java
 GKComputer gkComputer = new GKComputer(0.01);
 gkComputer.insertMany(listOfLongs);
@@ -51,11 +51,11 @@ quantile = gkMergedModels.quantile(0.75);
 
 ### Practical remarks
 
-Note that if you intend to merge models, you should not use a value of epsilon that is too small for the models to be merged. 
+Note that if you intend to merge models, you should not use a value of epsilon that is too small for the models to be merged. Otherwise, your quantile will be 0.
 
 The merged model has to know the total number of observations prior to quantile computation. Also, all models to be merged should have the same epsilon value. This value is also a parameter for the merged model.
 
-There may be several candidates for a same quantile. As of today, the mean of the candidates is returned when calling `gkComputer.quantile`, and all candidates are returned when calling `gkComputerquantiles`.
+There may be several candidates for a same quantile. As of today, the mean of the candidates is returned when calling `gkComputer.quantile`, and all candidates are returned when calling `gkComputer.quantiles`.
 
 ### References:
 
